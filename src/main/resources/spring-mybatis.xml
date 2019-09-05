@@ -39,20 +39,9 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
-		<property name="typeAliasesPackage" value="springMVC.dto" />   <!-- 这里配置了实体类的别名 -->
-		<property name="mapperLocations" value="classpath:mybatis/sql/system/*.xml"></property>
-		<!-- springMVC配置mybatis插件 -->
-		<!-- <property name="plugins">
-			<array>
-				<bean class="springMVC.interceptor.FullSQLInterceptor">
-                    <property name="properties">
-	                    <value>
-	　　　　　　　　　　　　　　　	dialect=mysql
-	　　　　　　　　　　　　　　	</value>
-                    </property>
-                </bean>
-			</array>
-		</property> -->
+		<!-- <property name="typeAliasesPackage" value="springMVC.dto" /> -->   <!-- 这里配置了实体类的别名 -->
+		<property name="configLocation" value="classpath:spring-mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath*:mybatis/sql/**/*.xml"></property>
 	</bean>
  
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
