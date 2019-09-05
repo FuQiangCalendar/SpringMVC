@@ -12,6 +12,7 @@ import springMVC.dto.UserDto;
 import springMVC.mapper.UserDtoMapper;
 import springMVC.service.system.UserDtoService;
 import springMVC.tools.enums.TableOprateEnum;
+import springMVC.tools.exception.ServiceException;
 import springMVC.tools.result.Result;
 
 @Service
@@ -118,17 +119,25 @@ public class UserDtoServiceImpl implements UserDtoService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Result selectByUser(String user) {
+	public Result selectByUser(String user) throws ServiceException {
+		boolean success = false;
 		List<Map<String, Object>> map = null;
 		try {
 			map = userDtoMapper.selectByUser(user);
+			success = true;
 		} catch (Exception e) {
-			e.printStackTrace();
-			return new Result(TableOprateEnum.SELECT_FAIL.getCode(), TableOprateEnum.SELECT_FAIL.getMsg(), map);
+//			e.printStackTrace();
+//			return new Result(TableOprateEnum.SELECT_FAIL.getCode(), TableOprateEnum.SELECT_FAIL.getMsg(), map);
+//			throw new ServiceException("是不是傻？sql查询出错啦！");
 		}
 		
-		if (Objects.isNull(map)) {
-			return new Result(TableOprateEnum.SELECT_NULL.getCode(), TableOprateEnum.SELECT_NULL.getMsg(), map);
+		if (!success) {
+			throw new ServiceException("是不是傻？sql查询出错啦！");
+		}
+		
+		if (Objects.isNull(map) || map.size() == 0) {
+//			return new Result(TableOprateEnum.SELECT_NULL.getCode(), TableOprateEnum.SELECT_NULL.getMsg(), map);
+			throw new ServiceException("是不是傻？系统无此用户");
 		}
 		return new Result(TableOprateEnum.SELECT_SUCCESS.getCode(), TableOprateEnum.SELECT_SUCCESS.getMsg(), map);
 	}

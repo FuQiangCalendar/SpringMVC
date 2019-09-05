@@ -13,9 +13,12 @@ import java.util.regex.Pattern;
 
 import org.springframework.util.StringUtils;
 
-
-
-
+/**
+ * 字符串工具类
+ * @author FuqCalendar
+ * @date 2019年9月5日14:04:51
+ *
+ */
 public class StringUtil extends StringUtils{
 	/**
 	 * 日志类

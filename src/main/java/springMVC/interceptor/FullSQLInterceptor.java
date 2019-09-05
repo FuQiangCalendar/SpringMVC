@@ -36,9 +36,9 @@ import org.slf4j.LoggerFactory;
  *     		<property name="dialect" value="oracle" />
  *     	</plugin>
  * 	</plugins>
- *
+ *{ Connection.class, Integer.class}) } mybatis 3.4.0+ 要多加Integer.class参数
  */
-//@Intercepts({ @Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class, Integer.class}) })
+@Intercepts({ @Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class}) })
 public class FullSQLInterceptor implements Interceptor {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FullSQLInterceptor.class);
 	private Configuration configuration;

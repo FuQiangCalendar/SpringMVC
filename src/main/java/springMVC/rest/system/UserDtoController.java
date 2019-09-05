@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import springMVC.service.system.UserDtoService;
+import springMVC.tools.exception.ServiceException;
 import springMVC.tools.result.Result;
 
 @RestController
@@ -18,7 +19,7 @@ public class UserDtoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/select_by_user", method = RequestMethod.GET)
-	public Result selectByUser (@RequestParam("user") String user) {
+	public Result selectByUser (@RequestParam("user") String user) throws Exception {
 		return userDtoService.selectByUser(user);
 	}
 	
